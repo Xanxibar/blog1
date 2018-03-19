@@ -1,0 +1,14 @@
+{% extends 'posts/base.html' %}
+
+{% block title %} Archive of Posts {% endblock %}
+
+{% block heading %}
+ Archive of Posts
+{% endblock %}
+{% block content %}
+    <ul>
+        {% for post in latest %}
+            <li>{{ post.publish }}&rarr;<a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

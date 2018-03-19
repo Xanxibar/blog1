@@ -1,0 +1,20 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% block title %}Tag cloud{% endblock %}
+
+{% block heading %}
+Tags
+{% endblock %}
+
+{% block content %}
+    
+    {% for tag in tags %}
+        <a href="{{ tag.get_absolute_url }}" >
+             <span class="tag-weight-{{ tag.weight }}")>
+                 {{ tag.name }}
+            </span>
+        </a>
+    {% empty %}
+        No tags yet
+    {% endfor %}
+{% endblock %}

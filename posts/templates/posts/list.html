@@ -1,0 +1,25 @@
+{% extends "posts/base.html" %}
+
+{% block title %}My Blog {% endblock %}
+
+{% block heading %}
+    Latest Entries
+{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        {% with post_url=post.get_absolute_url %}
+            <div class="blog-post">
+                <h2 class="blog-post-title"><a href="{{ post_url }}">{{ post.title }}</a></h2>
+                <p class="blog-post-meta">{{ post.publish }}by <a href="#">{{ post.author }}</a></p>
+                {{ post.text|truncatewords:30|linebreaks }}   
+                <a class='btn btn-outline-primary' href="{{ post_url }}">read more &rarr;</a>         
+            </div><!-- /.blog-post -->
+        {% endwith %}
+    {% empty %}
+        <h5>No posts are available at this time.</h5>
+    {% endfor %}
+    {{ block.super }}
+{% endblock %}
+
+  

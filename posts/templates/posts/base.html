@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% if is_paginated %}
+    {% include "posts/pagination.html" %}
+{% endif %}
+{% endblock %}

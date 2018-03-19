@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}
+404 - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h1>404 - <small>Page Not Found</small></h1>
+<p>Request URL: {{ request_path }}</p>
+<p>The resource you are trying to access is not available on this server.</p>
+{% endblock %}
