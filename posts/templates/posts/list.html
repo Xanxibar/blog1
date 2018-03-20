@@ -10,10 +10,10 @@
     {% for post in posts %}
         {% with post_url=post.get_absolute_url %}
             <div class="blog-post">
-                <h2 class="blog-post-title"><a href="{{ post_url }}">{{ post.title }}</a></h2>
-                <p class="blog-post-meta">{{ post.publish }}by <a href="#">{{ post.author }}</a></p>
+                <h2 class="blog-post-title"><a class="text-dark" href="{{ post_url }}">{{ post.title }}</a></h2>
+                <p class="blog-post-meta">{{ post.publish }}by <i class="text-dark" >{{ post.author }}</i></p>
                 {{ post.text|truncatewords:30|linebreaks }}   
-                <a class='btn btn-outline-primary' href="{{ post_url }}">read more &rarr;</a>         
+                <a class='btn btn-outline-dark' href="{{ post_url }}">read more &rarr;</a>         
             </div><!-- /.blog-post -->
         {% endwith %}
     {% empty %}

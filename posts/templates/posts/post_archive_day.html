@@ -1,0 +1,32 @@
+{% extends "posts/base.html" %}
+
+{% block title %} Archive of posts for {{ day|date:"F, j Y" }} {% endblock %}
+
+{% block heading %}
+ Archive of Posts for {{ day|date:"F, j Y"}} 
+{% endblock %}
+
+{% block content %}
+    {% if previous_year %}
+    <a href="{{ previous_day|date:'F, j Y' }}">&larr; previous day</a>
+    {% endif %}
+    {% if next_year %}
+    <a href="{{ next_day|date:'F, j Y' }}">next day &rarrfs;</a>
+    {% endif %}
+    <h2>View by date</h2>
+    <ul>
+        {% for date in date_list %}
+            <li><a href="" title="See posts for {{ date|date:"F, j Y" }} only">{{ date|date:"F, j Y" }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <div>
+        <h1>All Articles for {{ month|date:"F" }}</h1>
+        {% for obj in object_list %}
+            <p>
+                <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - <a href="" title="See more posts on this date">{{ obj.publish|date:"F j, Y" }}</a>
+            </p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

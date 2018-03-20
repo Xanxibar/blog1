@@ -4,7 +4,8 @@ from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
-from django.views.generic.dates import YearArchiveView
+from django.views.generic.dates import (DayArchiveView, MonthArchiveView, 
+TodayArchiveView, WeekArchiveView, YearArchiveView)
 from django.views.generic.detail import SingleObjectMixin
 
 
@@ -112,4 +113,29 @@ class PostYearArchiveView(YearArchiveView):
     queryset = Post.published.all()
     date_field = 'publish'
     make_object_list = True
+    allow_future = False
+
+
+class PostMonthArchiveView(MonthArchiveView):
+    queryset = Post.published.all()
+    date_field = 'publish'
+    allow_future = False
+
+
+class PostWeekArchiveView(WeekArchiveView):
+    queryset = Post.published.all()
+    date_field = "publish"
+    week_format = "%U"
+    allow_future = False
+
+
+class PostDayArchiveView(DayArchiveView):
+    queryset = Post.published.all()
+    date_field = "publish"
+    allow_future = False
+
+
+class PostTodayArchiveView(TodayArchiveView):
+    queryset = Post.published.all()
+    date_field = "publish"
     allow_future = False

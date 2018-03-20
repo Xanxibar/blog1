@@ -9,8 +9,7 @@ sitemaps = {'posts':PostSitemap,}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name="home.html"), name="home"),
-    path('posts/', include("posts.urls", namespace="posts")),
+    path('', include("posts.urls", namespace="posts")),
     path('sitemap.xml', sitemap, {'sitemaps':sitemaps}, name='django.contrib.sitemaps.views.sitemaps'),
 ]
 
