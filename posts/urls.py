@@ -12,11 +12,11 @@ app_name="posts"
 urlpatterns = [
     path('', PostListView.as_view(), name="post_list"),
     path(
-        '<int:year>/<int:month>/<int:day>/<slug:slug>/', 
+        '<int:year>/<str:month>/<int:day>/<slug:slug>/', 
         post_detail, name="post_detail"),
     path('<int:post_id>/share/', post_share, name='post_share'),
     path('archive/', ArchiveIndexView.as_view(
-        model=Post, date_field='publish'), name='post_archive'),
+        model=Post, date_field='publish', allow_empty=True), name='post_archive'),
     path('archive/<int:year>/', PostYearArchiveView.as_view(), name="year_archive"),
     path('archive/<int:year>/<str:month>/', PostMonthArchiveView.as_view(),
          name="month_archive"),

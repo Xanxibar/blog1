@@ -3,32 +3,35 @@
 {% block title %} Archive of posts for week {{ week }} of {{ week|date:"Y" }} {% endblock %}
 
 {% block heading %}
- Archive of Posts for Week {{ week }}
+       Archive of Posts for Week {{ week }}
 {% endblock %}
 
 {% block content %}
-    {% if previous_year %}
-    <a href="{{ previous_week|date:'F Y' }}">&larr; previous week</a>
-    {% endif %}
-    {% if next_year %}
-    <a href="{{ next_week|date:'F Y' }}">next week &rarrfs;</a>
-    {% endif %}
-    <h2>View by date</h2>
-    <ul>
-        {% for date in date_list %}
-            <li>
-                <a href="" title="See posts for {{ date|date:"j" }} only">{{ date|date:"j" }}</a>
-            </li>
-        {% endfor %}
-    </ul>
     
-    <div>
-        <h1>All Articles for {{ week }}</h1>
-        {% for obj in object_list %}
-            <p>
-                <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - <a href="" title="See more posts on this date">{{ obj.publish|date:"F j, Y" }}</a>
-            </p>
-        {% endfor %}
-    </div>
-
+     {% if date_list %}
+        <h2>View by date</h2>
+        <ul>
+            {% for date in date_list %}
+                <li>
+                    <a href="" title="See posts for {{ date|date:"j" }} only">{{ date|date:"j" }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <div>
+            <h1>All Articles for {{ week }}</h1>
+            {% for obj in object_list %}
+                <p>
+                    <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a> - <a href="" title="See more posts on this date">{{ obj.publish|date:"F j, Y" }}</a>
+                </p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No posts exist for this week.</p>
+    {% endif %}
+    <a class="text-muted" href="{% url 'posts:week_archive' previous_week|date:'Y' previous_week|date:'W' %}">&larr; previous week</a>
+    {% if next_week %}
+    |
+        <a class="text-muted" href="{% url 'posts:week_archive' next_week|date:'Y' next_week|date:'W' %}">next week &rarr;</a>
+    {% endif %}
 {% endblock %}

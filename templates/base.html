@@ -32,10 +32,14 @@
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="{% url 'posts:rss_feed' %}">Subscribe</a>
+            <a class="text-muted" href="{% url 'posts:rss_feed' %}">
+                <span class="oi oi-rss" title="rss feed" aria-hidden="true"> RSS</span>
+            </a>
+            
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Corgiyah</a>
+            <a class="blog-header-logo text-dark" href="{% url 'posts:post_list' %}">
+                <span class="oi oi-home" title="Home" aria-hidden="true">Corgiyah</span></a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
             <a class="btn btn-sm btn-outline-secondary" href="{% url 'posts:atom_feed' %}">Sign up</a> 

@@ -1,3 +1,4 @@
+import datetime
 from django.conf import settings
 from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Count
@@ -21,7 +22,9 @@ class PostListView(PageLinksMixin, ListView):
     template_name = "posts/list.html"
 
 
+
 def post_detail(request, year, month, day, slug):
+    month = datetime.datetime.strptime(month.title(), '%b').strftime('%m')
     post = get_object_or_404(
         Post, slug=slug, status='P', publish__year=year, 
         publish__month=month, publish__day=day)
@@ -40,7 +43,7 @@ def post_detail(request, year, month, day, slug):
     similar_posts = similar_posts.annotate(
         same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
     return render(
-        request, 'posts/detail.html', 
+        request, 'posts/post_detail.html', 
         {
             'post':post, 'comments':comments,
              'comment_form':comment_form, 'new_comment':new_comment,
@@ -114,12 +117,14 @@ class PostYearArchiveView(YearArchiveView):
     date_field = 'publish'
     make_object_list = True
     allow_future = False
+    allow_empty = True
 
 
 class PostMonthArchiveView(MonthArchiveView):
     queryset = Post.published.all()
     date_field = 'publish'
     allow_future = False
+    allow_empty = True
 
 
 class PostWeekArchiveView(WeekArchiveView):
@@ -127,15 +132,18 @@ class PostWeekArchiveView(WeekArchiveView):
     date_field = "publish"
     week_format = "%U"
     allow_future = False
+    allow_empty = True
 
 
 class PostDayArchiveView(DayArchiveView):
     queryset = Post.published.all()
     date_field = "publish"
     allow_future = False
+    allow_empty = True
 
 
 class PostTodayArchiveView(TodayArchiveView):
     queryset = Post.published.all()
     date_field = "publish"
     allow_future = False
+    allow_empty = True

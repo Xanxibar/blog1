@@ -3,12 +3,13 @@
 {% block title %}Posts tagged: "{{ tag.name }}"{% endblock %}
 
 {% block heading %}
-Posts tagged: "{{ tag.name }}"
+<span class="oi oi-tag" title="tag:{{ tag.name }}" aria-hidden="true"> "{{ tag.name }}" </span>
+
 {% endblock %}
 
 {% block content %}
     {% for post in object_list %}
-        <h2> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        <h2> <a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
         <p class="date"> 
             Published {{ post.publish }} by {{ post.author }}
         </p>
