@@ -21,7 +21,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -86,7 +85,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "user.User"
 SITE_ID = 1
-
+SITE_NAME = "example.com"
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -108,6 +107,17 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
+PAGINATE_BY = 5
 
-
+# Email settings
+SPARKPOST_API_KEY = '79256ccb1c97835017433f1a336525b'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 	'smtp.sparkpostmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'SMTP_Injection'
+EMAIL_HOST_PASSWORD = SPARKPOST_API_KEY
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "no-reply@{}".format(SITE_NAME)  # fix when going live

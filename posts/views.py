@@ -19,7 +19,7 @@ class PostListView(PageLinksMixin, ListView):
     queryset = Post.published.all()
     context_object_name = "posts"
     paginate_by = settings.PAGINATE_BY
-    template_name = "posts/list.html"
+    
 
 
 

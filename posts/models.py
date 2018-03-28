@@ -24,6 +24,7 @@ class Post(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='D')
+    objects = models.Manager()
     published = PublishedManager()
 
     class Meta:
@@ -44,6 +45,22 @@ class Post(models.Model):
             self.publish.strftime('%d'),
             self.slug
         ])
+
+    def get_archive_year(self):
+        return reverse('year_archive', kwargs={'year':self.publish.year})
+
+    def get_archive_month(self):
+        return reverse(
+            'month_archive', args=[self.publish.year, self.publish.strftime('%b').lower()])
+
+    def get_archive_day(self):
+        return reverse(
+            'day_archive', args=[
+                self.publish.year, self.publish.strftime('%b').lower(), 
+                self.publish.strftime('%d')])
+    
+    def get_archive_today(self):
+        return reverse('today_archive')
 
 
 class Comment(models.Model):
